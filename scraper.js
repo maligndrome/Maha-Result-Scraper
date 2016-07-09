@@ -1,8 +1,10 @@
 var level=0;
 	var globCtr=0;
-	var pagesArray=[]; var maxPages=300;
+	var pagesArray=[]; var maxPages=1000;
 	var link='http://mahresult.nic.in/hsc2016/resultview16.asp';
 	//var roll=268645;
+	var file = "data:text/plain;charset=utf-8,";
+	var logFile = '';
 	var a=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 		var b=['a','e','i','o','u','b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z'];
 		var c=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -46,18 +48,29 @@ var level=0;
 			function(data){
 				if(data.indexOf('bg-danger')>-1){
 					if(globCtr==132) {
-						console.log('moving on...')
+						logFile+=('##'+commonNames[globCtr]+':roll'+'##')+'Not found';
 						globCtr=0;
-						if(--maxPages){scrapeDataCommon(++roll); console.log(roll);}
+						if(--maxPages){scrapeDataCommon(++roll);}
 					} else {
 						++globCtr;
 						scrapeDataCommon(roll);
 					}
 				}else{
-					console.log(data.slice(3011,data.indexOf('</table>'))); console.log(commonNames[globCtr]);
-					console.log('$$$$$');
+					logFile+=('##'+commonNames[globCtr]+':'+roll+'##')+(data.slice(3011,data.indexOf('</table>')));
+					logFile+=('$$$$$');
 					globCtr=0;
-					if(--maxPages){scrapeDataCommon(++roll); console.log(roll);}
+					if(--maxPages){scrapeDataCommon(++roll);}
+					else {
+					    var encoded = encodeURIComponent(logFile);
+					    file += encoded;
+					    var a = document.createElement('a');
+					    a.href = file;
+					    a.target   = '_blank';
+					    a.download = 'data-from-'+(roll-1000)+'-to-'+roll;
+					    document.body.appendChild(a);
+					    a.click();
+					    a.remove();
+					}
 				}
 			}
 		);
