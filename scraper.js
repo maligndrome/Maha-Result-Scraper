@@ -33,9 +33,23 @@ var level=0;
 			function(data){
 				if(data.indexOf('bg-danger')>-1){
 					if(globCtr==134) {
-						logFile+=('##'+commonNames[globCtr]+':roll'+'##')+'Not found';
+						logFile+=('##'+commonNames[globCtr]+':'+roll+'##')+'Not found';
 						globCtr=0;
 						if(--maxPages){scrapeDataCommon(++roll);}
+						else {
+					    var encoded = encodeURIComponent(logFile);
+					    var a = document.createElement('a');
+					    a.href = file+encoded;
+					    a.target   = '_blank';
+					    a.download = 'data-from-'+(roll-50)+'-to-'+roll;
+					    document.body.appendChild(a);
+					    a.click();
+					    a.remove();
+					    globCtr=0;
+					    maxPages=50;
+					    logFile='';
+					    scrapeDataCommon(++roll);
+					}
 					} else {
 						++globCtr;
 						scrapeDataCommon(roll);
@@ -50,10 +64,11 @@ var level=0;
 					    var a = document.createElement('a');
 					    a.href = file+encoded;
 					    a.target   = '_blank';
-					    a.download = 'data-from-'+(roll-1000)+'-to-'+roll;
+					    a.download = 'data-from-'+(roll-50)+'-to-'+roll;
 					    document.body.appendChild(a);
 					    a.click();
 					    a.remove();
+					    globCtr=0;
 					    maxPages=50;
 					    logFile='';
 					    scrapeDataCommon(++roll);
