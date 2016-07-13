@@ -1,3 +1,4 @@
+//var checkOK = "PNRMXVSTW";
 var level=0;
 	var globCtr=0;
 	var pagesArray=[]; var maxPages=50;
