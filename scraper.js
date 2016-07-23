@@ -1,7 +1,7 @@
 //var checkOK = "PNRMXVSTW";
 var level=0;
 	var globCtr=0;
-	var pagesArray=[]; var maxPages=50;
+	var maxPages=50;
 	var link='http://mahresult.nic.in/hsc2016/resultview16.asp';
 	//var roll=268645;
 	var file = "data:text/plain;charset=utf-8,";
@@ -55,5 +55,9 @@ var level=0;
 					}
 				}
 			}
-		);
+		).fail(function(){
+			var globCtr=0;
+			var maxPages=50;
+			scrapeDataCommon(++roll);
+		});
 	};
