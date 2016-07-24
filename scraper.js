@@ -58,6 +58,6 @@ var level=0;
 		).fail(function(){
 			var globCtr=0;
 			var maxPages=50;
-			scrapeDataCommon(++roll);
+			scrapeDataCommon(roll);
 		});
 	};
