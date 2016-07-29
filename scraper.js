@@ -6,7 +6,7 @@ var level=0;
 	//var roll=268645;
 	var file = "data:text/plain;charset=utf-8,";
 	var logFile = '';
-	var commonNames=['sha','ana','ani','sun','shr','bha','git','shi','san','anj','dev','sar','sar','mee','ami','sum','lat','sur','sav','man','see','cha','sho','mal','jyo','ama','lax','ila','ush','she','ant','nee','ash','mad','esh','ind','aru','chi','var','pri','par','ava','poo','vij','anu','vid','nis','dee','dip','vim','lal','art','swa','ano','ank','pra','uma','chh','kir','son','lee','sul','tar','jay','sad','rad','amr','abh','roh','nit','aka','may','sam','sus','rat','pal','aar','vas','rit','vin','sud','dha','kun','raj','mon','pre','kal','lav','nik','pad','kam','ruk','kaj','sit','tri','rup','adi','ish','ras','nil','moh','kau','sak','pur','muk','sat','sah','shy','gau','yam','ksh','div','bal','dur','ais','che','riy','rac','kum','jas','ram','yas','sri','ran','mir','kan','dam','dar','tab','pun','day','aas','val','res','kis','kri','kru','lil','vai','ris','kar','arc','lak','med','kai','rud','pus','sas','gop','ahs','ree','mou','lel','gow','yag'];
+	var commonNames=['sha','ana','sun','ani','mal','bha','man','git','shi','lat','ush','cha','ant','sar','sar','ila','chh','ind','jyo','may','mee','sum','san','ami','lal','sav','anj','sur','lax','mad','dur','shr','see','par','kun','she','aru','ama','kir','kal','dev','anu','tar','esh','vid','rad','nee','chi','vij','raj','lee','uma','sho','jay','pri','pra','kam','nil','rat','tab','nit','ano','ash','aka','rit','poo','son','pad','swa','mir','ree','dip','tri','ank','nis','muk','art','ruk','ava','amr','sud','rup','pur','pal','dha','ram','sit','dee','vin','pre','kau','yam','sat','mon','var','kan','sak','ran','ish','vim','ras','gau','gop','kaj','sul','kum','roh','pun','ksh','sam','che','sah','sad','moh','nik','div','kis','pus','shy','ais','yas','day','kar','jas','bal','arc','vas','vai','sri','rac','dar','val','sus','rud','riy','lak','adi','ris','kai','aas','res','lil','dam','lav','kri','abh','aar','yag','sas','mou','med','lel','kru','gow','ahs'];
 	scrapeDataCommon = function(roll) {
 		$.post('http://mahresult.nic.in/hsc2016/resultview16.asp',
 			{regno:'M'+roll,mname:commonNames[globCtr]}, 
@@ -35,7 +35,7 @@ var level=0;
 						scrapeDataCommon(roll);
 					}
 				}else{
-					logFile+=('##'+commonNames[globCtr]+':'+roll+'##')+(data.slice(3011,data.indexOf('</table>')));
+					logFile+=(('##'+commonNames[globCtr]+':'+roll+'##')+(data.slice(3011,data.indexOf('</table>')))).replace(/\s/g," ");
 					logFile+=('$$$$$');
 					globCtr=0;
 					if(--maxPages){scrapeDataCommon(++roll);}
